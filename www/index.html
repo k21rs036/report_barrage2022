@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="keys.js"></script>
     <script>
         function rgbToColor(r, g, b) {
             return "#" + hex02(r) + hex02(g) + hex02(b);
@@ -176,7 +177,7 @@
             document.getElementById("message").innerHTML = "START";
         }
 
-
+        var ncmb = new NCMB(this.appKey, this.clientKey);
 
         // 繰り返し実行する処理
         function timer() {
