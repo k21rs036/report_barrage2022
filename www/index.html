@@ -172,6 +172,7 @@
             $("#btnA").prop("disabled", true);
             startTime = new Date();
             scoreC = 0;
+            T = 10;
 
             ctx.fillStyle = "rgb(0, 255, 0)";
             document.getElementById("message").innerHTML = "START";
@@ -252,17 +253,14 @@
                 if (tx > 320 || tx < 0) {
                     tactive = false;
                 }
-                if (bactive && dist(tx, ty, bx, by) < 40) {
+                if (bactive && dist(tx, ty, bx, by) < 50) {
                     scoreC += 1;
+                    T += 1;
 
                     bactive = false;
                     tactive = false;
                 }
-                if (bactive && dist(tx, ty, bx, by) < 50) {
-                    T += 1;
-                    bactive = false;
-                    tactive = false;
-                }
+                
             } else {
                 tactive = true;
                 tx = 300;
