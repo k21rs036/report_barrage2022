@@ -60,7 +60,7 @@
 
         // 変数宣言
 
-        var score = 0;
+        var scoreC = 0;
 
         var active = false;
         var startTime = 0;
@@ -171,13 +171,30 @@
             tactive = false;
             $("#btnA").prop("disabled", true);
             startTime = new Date();
-            score = 0;
+            scoreC = 0;
 
             ctx.fillStyle = "rgb(0, 255, 0)";
             document.getElementById("message").innerHTML = "START";
         }
 
         var ncmb = new NCMB(this.appKey, this.clientKey);
+
+        // ニフクラデータの保存
+        function SS(name, score) {
+            var RP = ncmb.DataStore("RP");// 保存先クラスを作成
+            var rp = new RP();// クラスインスタンスを生成
+            rp.set("name", name);// 値を設定
+            rp.set("score", score);
+            // 保存を実施
+            rp.save()
+                .then(function() {
+                    console.log("保存に成功しました。");// 保存に成功
+                })
+                .catch(function(error) {
+                    console.log("保存に失敗しました。" + error);// 保存に失敗
+                });
+        }
+
 
         // 繰り返し実行する処理
         function timer() {
@@ -188,7 +205,7 @@
                 ctx.beginPath();
                 ctx.arc(150, 280, 20, 0, Math.PI * 2, false);
                 ctx.fill();
-                $("#score").html("SCORE: " + score);
+                $("#score").html("SCORE: " + scoreC);
 
                 // ターゲットの処理
                 targetMove();
@@ -236,7 +253,7 @@
                     tactive = false;
                 }
                 if (bactive && dist(tx, ty, bx, by) < 40) {
-                    score += 1;
+                    scoreC += 1;
 
                     bactive = false;
                     tactive = false;
