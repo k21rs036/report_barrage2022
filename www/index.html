@@ -244,6 +244,7 @@
                 $("#remain").text("残り：　" + rest + "秒");
                 if (rest <= 0) {
                     active = false;
+                    Name(this.scoreC);
                     $("#btnA").prop("disabled", false);
                 }
             }
