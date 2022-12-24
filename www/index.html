@@ -182,18 +182,31 @@
 
         // ニフクラデータの保存
         function SS(name, score) {
-            var RP = ncmb.DataStore("RP");// 保存先クラスを作成
-            var rp = new RP();// クラスインスタンスを生成
-            rp.set("name", name);// 値を設定
+            var RP = ncmb.DataStore("RP"); // 保存先クラスを作成
+            var rp = new RP(); // クラスインスタンスを生成
+            rp.set("name", name); // 値を設定
             rp.set("score", score);
             // 保存を実施
             rp.save()
                 .then(function() {
-                    console.log("保存に成功しました。");// 保存に成功
+                    console.log("保存に成功しました。"); // 保存に成功
                 })
                 .catch(function(error) {
-                    console.log("保存に失敗しました。" + error);// 保存に失敗
+                    console.log("保存に失敗しました。" + error); // 保存に失敗
                 });
+        }
+
+        // 名前入力
+        function Name(counts) {
+            // 入力表示
+            var name = window.prompt("名前を入力してください", "");
+            if (name == null || name == "") {
+                console.log("保存がキャンセルされました");
+            } else {
+                // スコアと入力した名前を保存
+                SS(name, counts);
+                console.log(name + "さんのスコアは" + String(counts)+ "です。"); // OKしたとき
+            }
         }
 
 
@@ -260,7 +273,7 @@
                     bactive = false;
                     tactive = false;
                 }
-                
+
             } else {
                 tactive = true;
                 tx = 300;
