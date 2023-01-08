@@ -196,6 +196,21 @@
                 });
         }
 
+        function CR() {
+            // 保存先クラスを作成
+            var highScore = ncmb.DataStore("RP");
+            highScore.order("score", true)// scoreの降順
+                .limit(5).fetchAll()//最大５
+                .then(function(results) {
+                    sD(results); // 保存に成功
+                })
+                .catch(function(error) {
+                    console.log("検索に失敗しました。エラー:" + error); // 保存に失敗
+                });
+
+        }
+
+
         // 名前入力
         function Name(counts) {
             // 入力表示
@@ -205,7 +220,8 @@
             } else {
                 // スコアと入力した名前を保存
                 SS(name, counts);
-                console.log(name + "さんのスコアは" + String(counts)+ "です。"); // OKしたとき
+                CR();
+                console.log(name + "さんのスコアは" + String(counts) + "です。"); // OKしたとき
             }
         }
 
