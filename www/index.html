@@ -195,7 +195,7 @@
                     console.log("保存に失敗しました。" + error); // 保存に失敗
                 });
         }
-
+        //ニフクラのデータをフェッチ
         function CR() {
             // 保存先クラスを作成
             var highScore = ncmb.DataStore("RP");
@@ -203,18 +203,29 @@
                 .limit(5).fetchAll()//最大５
                 .then(function(results) {
                     sD(results); // 保存に成功
+                    HK(results);
                 })
                 .catch(function(error) {
                     console.log("検索に失敗しました。エラー:" + error); // 保存に失敗
                 });
 
         }
-
+        //フェッチされたデータを表示
         function sD(ka) {
             var JC =0;
             for (i = 0; i < ka.length; i++) {
                 JC ++;
                 console.log(JC + "位は " + ka[i].name + "さんのスコアは " + ka[i].score + "です。");
+            }
+        }
+
+        function HK(ji){
+            for (i = 0; i < ji.length; i++) {
+                if(scoreC >= ji[4].score){
+                    console.log( "ランクインしました！！！");
+                } else{
+                    console.log("頑張ってください！！！");
+                }
             }
         }
 
