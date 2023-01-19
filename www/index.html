@@ -190,6 +190,7 @@
             rp.save()
                 .then(function() {
                     console.log("保存に成功しました。"); // 保存に成功
+                    CR();
                 })
                 .catch(function(error) {
                     console.log("保存に失敗しました。" + error); // 保存に失敗
@@ -199,11 +200,10 @@
         function CR() {
             // 保存先クラスを作成
             var highScore = ncmb.DataStore("RP");
-            highScore.order("score", true)// scoreの降順
-                .limit(5).fetchAll()//最大５
+            highScore.order("score", true) // scoreの降順
+                .limit(5).fetchAll() //最大５
                 .then(function(results) {
-                    sD(results); // 保存に成功
-                    HK(results);
+                    HK(results);//保存に成功
                 })
                 .catch(function(error) {
                     console.log("検索に失敗しました。エラー:" + error); // 保存に失敗
@@ -211,20 +211,17 @@
 
         }
         //フェッチされたデータを表示
-        function sD(ka) {
-            var JC =0;
-            for (i = 0; i < ka.length; i++) {
-                JC ++;
-                console.log(JC + "位は " + ka[i].name + "さんのスコアは " + ka[i].score + "です。");
-            }
-        }
-
-        function HK(ji){
-                if(scoreC >= ji[4].score){
-                    console.log( "ランクインしました！！！");
-                } else{
-                    console.log("頑張ってください！！！");
+        function HK(ji) {
+            if (scoreC >= ji[4].score) {
+                console.log("ランクインしました！！！");
+                var JC = 0;
+                for (i = 0; i < ji.length; i++) {
+                    JC++;
+                    console.log(JC + "位は " + ji[i].name + "さんのスコアは " + ji[i].score + "です。");
                 }
+            } else {
+                console.log("頑張ってください！！！");
+            }
         }
 
         // 名前入力
@@ -235,9 +232,9 @@
                 console.log("保存がキャンセルされました");
             } else {
                 // スコアと入力した名前を保存
-                SS(name, counts);
-                CR();
+                //CR();
                 console.log(name + "さんのスコアは" + String(counts) + "です。"); // OKしたとき
+                SS(name, counts);
             }
         }
 
